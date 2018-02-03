@@ -47,15 +47,17 @@
 
 
 </body>
-<!-- UI script is down here after all of the elements are defined -->
-<script src="./uiHelper.js"></script>
+
 <!-- Node.js exports system for controlling locally stored HTML5 data -->
 <script>
     // You can also require other files to run in this process
     // This is our electron area where we can require other things
     let controller = require('./storageController.js');
     controller.initListCount();
+    controller.resetListCount();
 </script>
+<!-- UI script is down here after all of the elements are defined -->
+<script src="./uiHelper.js"></script>
 
 
 
