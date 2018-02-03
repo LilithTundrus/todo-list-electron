@@ -1,0 +1,28 @@
+{
+  "name": "todo-list-electron",
+  "version": "0.0.2",
+  "description": "a TODO list app written in electron",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LilithTundrus/todo-list-electron.git"
+  },
+  "keywords": [
+    "electron",
+    "todo",
+    "list",
+    "organization"
+  ],
+  "author": "Lilith Tundrus",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LilithTundrus/todo-list-electron/issues"
+  },
+  "homepage": "https://github.com/LilithTundrus/todo-list-electron#readme",
+  "dependencies": {
+    "electron": "^1.7.12"
+  }
+}
