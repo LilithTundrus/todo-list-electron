@@ -8,6 +8,8 @@ document.getElementById('plusButton').addEventListener('click', function () {
 })
 
 document.getElementById('addTodoButton').addEventListener('click', function () {
+    // TODO: Create some padding for elements
+    // TODO: 
     let divTopAppend = document.createElement('div');
     divTopAppend.setAttribute('class', 'w3-container w3-card');
     divTopAppend.setAttribute('id', 'test');
