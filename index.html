@@ -20,12 +20,29 @@
             <button id="plusButton" class="w3-circle w3-blue w3-button w3-xlarge">+</button>
         </div>
         <!-- Pull up a w3-model on click for text input -->
-
-        <div id="listContainer" class="w3-container">
-            <h3>Click the '+' button to add an item</h3>
+        <div id="inputModal" class="w3-modal">
+            <div class="w3-modal-content w3-animate-bottom w3-card-4">
+                <header class="w3-container w3-blue">
+                    <span onclick="document.getElementById('inputModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                    <h3 class="w3-center">Add an Item:</h3>
+                    <div class="w3-container w3-blue">
+                        <p>
+                            <br>
+                            <input class="w3-input" type="text">
+                            <br>
+                            <button class="w3-button w3-light-blue">Add</button>
+                        </p>
+                    </div>
+                </header>
+            </div>
         </div>
     </div>
-    <!-- On that click, add a new empty w3-card Div -->
+
+
+    <div id="listContainer" class="w3-container">
+        <h3>Click the '+' button to add an item</h3>
+    </div>
+    </div>
 
 </body>
 <!-- UI script is down here after all of the elements are defined -->
