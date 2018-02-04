@@ -77,9 +77,7 @@ document.getElementById('addTodoButton').addEventListener('click', function () {
 })
 
 function removeItem(id) {
-    {
-        document.getElementById(`listItem${id}`).style.display = 'none';
-        controller.removeTodoListItemByID(id)
-    }
+    document.getElementById(`listItem${id}`).style.display = 'none';
+    controller.removeTodoListItemByID(id);
 }
 
