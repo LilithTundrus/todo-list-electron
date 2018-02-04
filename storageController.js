@@ -14,14 +14,14 @@ function removeTodoListItemByID(id) {
     // Iterate over the localStorage Array and check for an object match
     console.log(`Searching for id: ${id}`)
     let tempListItemsArray = JSON.parse(localStorage.listItems);
-    let newListArray
     tempListItemsArray.forEach((entry, index) => {
-        if (entry.listItemNumber == id) {
-            newListArray = tempListItemsArray.splice(index, 1)
+        if (entry.id == id) {
+            console.log('match!!!! Removing...')
+            tempListItemsArray.splice(index, 1)
         }
     })
     // put the new array back into localStorage
-    localStorage.listItems = JSON.stringify(newListArray);
+    localStorage.listItems = JSON.stringify(tempListItemsArray);
 }
 
 function initListCount() {
