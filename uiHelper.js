@@ -11,21 +11,28 @@ if (listItems.length > 0) {
     console.log(listItems)
     // Put each element into the DOM
     listItems.forEach((entry, index) => {
+        // Create the main div card to attach the note data to
         let divToAppend = document.createElement('div');
-        divToAppend.setAttribute('class', 'w3-card-2 w3-container');
+        // Set the attributes and stylings we need
+        divToAppend.setAttribute('class', 'w3-card-2 w3-container w3-display-container  w3-section');
         divToAppend.setAttribute('style', 'width: 100%;');
-
         divToAppend.setAttribute('id', `listItem${entry.id}`);
+
+        // Create a header to get the todo list item's title
+
+        // the div where the todolist Item's data will go
         let paragraphDiv = document.createElement('div')
         paragraphDiv.setAttribute('class', 'w3-container');
         let todoParagraph = document.createElement('p');
-        let removeButton = document.createElement('button');
+
+        // The button used to remove the item
+        let removeSpan = document.createElement('i');
         // Create  the button to then append
-        removeButton.addEventListener('click', function () {
+        removeSpan.addEventListener('click', function () {
             removeItem(entry.id);
         });
-        removeButton.setAttribute('class', 'w3-button w3-blue w3-right');
-        removeButton.innerText = 'Remove';
+        removeSpan.setAttribute('class', 'material-icons w3-xlarge w3-display-topright w3-blue');
+        removeSpan.innerText = 'close';
 
         todoParagraph.innerText = entry.text;
         paragraphDiv.setAttribute('style', 'width: 100%;');
@@ -33,21 +40,19 @@ if (listItems.length > 0) {
         paragraphDiv.appendChild(todoParagraph)
         document.getElementById('listContainer').appendChild(divToAppend);
         document.getElementById(`listItem${entry.id}`).appendChild(paragraphDiv);
-        document.getElementById(`listItem${entry.id}`).appendChild(removeButton);
+        document.getElementById(`listItem${entry.id}`).appendChild(removeSpan);
 
     })
 }
 
 document.getElementById('addTodoButton').addEventListener('click', function () {
-    // TODO: retrive the old notes
-    // TODO: create a better way of controlling these elements!
     let divToAppend = document.createElement('div');
     divToAppend.setAttribute('class', 'w3-container w3-card');
     // Advanced the number of items by one
     let instancedUUID = uuid();
     divToAppend.setAttribute('id', `listItem${instancedUUID}`);
     let todoText = document.getElementById('todoInputText').value;
-    let removeButton = document.createElement('button');
+    let removeSpan = document.createElement('button');
     let itemToStore = {
         // We need to store an ID to reference this by in the storage controller function
         id: instancedUUID,
@@ -56,18 +61,18 @@ document.getElementById('addTodoButton').addEventListener('click', function () {
     listItems.push(itemToStore);
     // Store the todo value in localStorage
     localStorage.listItems = JSON.stringify(listItems);
-    console.log(localStorage.listItems)
+    console.log(localStorage.listItems);
 
-    // Create  the button to then append
-    removeButton.addEventListener('click', function () {
+    // Create the button to then append
+    removeSpan.addEventListener('click', function () {
         removeItem(instancedUUID);
     });
-    removeButton.setAttribute('class', 'w3-button w3-blue w3-right');
-    removeButton.innerText = 'Remove';
+    removeSpan.setAttribute('class', 'w3-button w3-blue w3-right');
+    removeSpan.innerText = 'Remove';
 
     divToAppend.innerText = todoText;
     document.getElementById('listContainer').appendChild(divToAppend);
-    document.getElementById(`listItem${instancedUUID}`).appendChild(removeButton);
+    document.getElementById(`listItem${instancedUUID}`).appendChild(removeSpan);
 
     // Re-hide the modal
     document.getElementById('inputModal').style.display = 'none';
