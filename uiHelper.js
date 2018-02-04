@@ -12,9 +12,13 @@ if (listItems.length > 0) {
     // Put each element into the DOM
     listItems.forEach((entry, index) => {
         let divToAppend = document.createElement('div');
-        divToAppend.setAttribute('class', 'w3-container w3-card');
-        divToAppend.setAttribute('id', `listItem${entry.id}`);
+        divToAppend.setAttribute('class', 'w3-card-2 w3-container');
+        divToAppend.setAttribute('style', 'width: 100%;');
 
+        divToAppend.setAttribute('id', `listItem${entry.id}`);
+        let paragraphDiv = document.createElement('div')
+        paragraphDiv.setAttribute('class', 'w3-container');
+        let todoParagraph = document.createElement('p');
         let removeButton = document.createElement('button');
         // Create  the button to then append
         removeButton.addEventListener('click', function () {
@@ -23,20 +27,23 @@ if (listItems.length > 0) {
         removeButton.setAttribute('class', 'w3-button w3-blue w3-right');
         removeButton.innerText = 'Remove';
 
-        divToAppend.innerText = entry.text;
+        todoParagraph.innerText = entry.text;
+        paragraphDiv.setAttribute('style', 'width: 100%;');
+
+        paragraphDiv.appendChild(todoParagraph)
         document.getElementById('listContainer').appendChild(divToAppend);
+        document.getElementById(`listItem${entry.id}`).appendChild(paragraphDiv);
         document.getElementById(`listItem${entry.id}`).appendChild(removeButton);
+
     })
 }
 
 document.getElementById('addTodoButton').addEventListener('click', function () {
     // TODO: retrive the old notes
     // TODO: create a better way of controlling these elements!
-    // TODO: remove the reliance on listCount
     let divToAppend = document.createElement('div');
     divToAppend.setAttribute('class', 'w3-container w3-card');
     // Advanced the number of items by one
-    localStorage.listCount++;
     let instancedUUID = uuid();
     divToAppend.setAttribute('id', `listItem${instancedUUID}`);
     let todoText = document.getElementById('todoInputText').value;
@@ -73,7 +80,6 @@ function removeItem(id) {
     {
         document.getElementById(`listItem${id}`).style.display = 'none';
         controller.removeTodoListItemByID(id)
-        localStorage.listCount--;
     }
 }
 
