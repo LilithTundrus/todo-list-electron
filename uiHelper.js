@@ -13,8 +13,19 @@ if (listItems.length > 0) {
     listItems.forEach((entry, index) => {
         let divToAppend = document.createElement('div');
         divToAppend.setAttribute('class', 'w3-container w3-card');
-        divToAppend.setAttribute('id', entry.id);
+        divToAppend.setAttribute('id', `listItem${entry.id}`);
 
+        let removeButton = document.createElement('button');
+        // Create  the button to then append
+        removeButton.addEventListener('click', function () {
+            removeItem(entry.id);
+        });
+        removeButton.setAttribute('class', 'w3-button w3-blue w3-right');
+        removeButton.innerText = 'Remove';
+
+        divToAppend.innerText = entry.text;
+        document.getElementById('listContainer').appendChild(divToAppend);
+        document.getElementById(`listItem${entry.id}`).appendChild(removeButton);
     })
 }
 
