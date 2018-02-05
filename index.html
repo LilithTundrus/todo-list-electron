@@ -59,13 +59,14 @@
     // This is our electron area where we can require other things
     let controller = require('./storageController.js');
     // controller.resetListItems();
-
+    // TODO: Allow for existing items to be edited
+    // TODO: Get the styling for items to be better
     function uuid() {
         var uuid = "", i, random;
         for (i = 0; i < 32; i++) {
             random = Math.random() * 16 | 0;
             if (i == 8 || i == 12 || i == 16 || i == 20) {
-                uuid += "-"
+                uuid += "-";
             }
             uuid += (i == 12 ? 4 : (i == 16 ? (random & 3 | 8) : random)).toString(16);
         }
@@ -74,7 +75,5 @@
 </script>
 <!-- UI script is down here after all of the elements are defined -->
 <script src="./uiHelper.js"></script>
-
-
 
 </html>

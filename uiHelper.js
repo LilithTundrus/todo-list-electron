@@ -42,7 +42,6 @@ if (listItems.length > 0) {
         removeSpan.innerText = 'close';
 
         todoParagraph.innerText = entry.text;
-        paragraphDiv.setAttribute('style', 'width: 100%;');
         paragraphDiv.appendChild(todoParagraph);
         document.getElementById('listContainer').appendChild(divToAppend);
         document.getElementById(`listItem${entry.id}`).appendChild(headerDiv);
@@ -84,7 +83,6 @@ document.getElementById('addTodoButton').addEventListener('click', function () {
     paragraphDiv.setAttribute('class', 'w3-container');
     let todoParagraph = document.createElement('p');
     todoParagraph.innerText = todoText;
-    paragraphDiv.setAttribute('style', 'width: 100%;');
     // Create the button to then append
     removeSpan.addEventListener('click', function () {
         removeItem(instancedUUID);
@@ -105,6 +103,6 @@ document.getElementById('addTodoButton').addEventListener('click', function () {
 
 function removeItem(id) {
     document.getElementById(`listItem${id}`).style.display = 'none';
-    controller.removeTodoListItemByID(id);
+    return controller.removeTodoListItemByID(id);
 }
 
