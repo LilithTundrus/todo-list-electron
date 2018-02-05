@@ -29,6 +29,9 @@ if (listItems.length > 0) {
         let paragraphDiv = document.createElement('div')
         paragraphDiv.setAttribute('class', 'w3-container');
         let todoParagraph = document.createElement('p');
+        todoParagraph.innerText = entry.text;
+        paragraphDiv.appendChild(todoParagraph);
+
 
         // The button used to remove the item
         let removeSpan = document.createElement('i');
@@ -39,8 +42,6 @@ if (listItems.length > 0) {
         removeSpan.setAttribute('class', 'material-icons w3-xlarge w3-display-topright w3-blue');
         removeSpan.innerText = 'close';
 
-        todoParagraph.innerText = entry.text;
-        paragraphDiv.appendChild(todoParagraph);
         document.getElementById('listContainer').appendChild(divToAppend);
         document.getElementById(`listItem${entry.id}`).appendChild(headerArea);
         document.getElementById(`listItem${entry.id}`).appendChild(paragraphDiv);
@@ -63,11 +64,13 @@ document.getElementById('addTodoButton').addEventListener('click', function () {
         todoTitle = 'No Subject';
     }
     let itemToStore = {
-        // We need to store an ID to reference this by in the storage controller function
         id: instancedUUID,
         text: todoText,
         title: todoTitle
     }
+    localStorage.listItems = JSON.stringify(listItems);
+    console.log(localStorage.listItems);
+
     // Create a header to get the todo list item's title
     let headerArea = document.createElement('header');
     headerArea.setAttribute('class', 'w3-container w3-blue');
@@ -77,14 +80,16 @@ document.getElementById('addTodoButton').addEventListener('click', function () {
 
     listItems.push(itemToStore);
     // Store the todo value in localStorage
-    localStorage.listItems = JSON.stringify(listItems);
-    console.log(localStorage.listItems);
+
 
     // the div where the todolist Item's data will go
     let paragraphDiv = document.createElement('div')
     paragraphDiv.setAttribute('class', 'w3-container');
     let todoParagraph = document.createElement('p');
     todoParagraph.innerText = todoText;
+    paragraphDiv.appendChild(todoParagraph);
+
+
     // The button used to remove the item
     let removeSpan = document.createElement('i');
     // Create  the button to then append
@@ -93,10 +98,10 @@ document.getElementById('addTodoButton').addEventListener('click', function () {
     });
     removeSpan.setAttribute('class', 'material-icons w3-xlarge w3-display-topright w3-blue');
     removeSpan.innerText = 'close';
-    paragraphDiv.appendChild(todoParagraph);
-    divToAppend.appendChild(paragraphDiv);
+
     document.getElementById('listContainer').appendChild(divToAppend);
     document.getElementById(`listItem${instancedUUID}`).appendChild(headerArea);
+    document.getElementById(`listItem${instancedUUID}`).appendChild(paragraphDiv);
     document.getElementById(`listItem${instancedUUID}`).appendChild(removeSpan);
 
 
