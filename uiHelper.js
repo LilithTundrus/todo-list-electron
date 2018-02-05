@@ -19,13 +19,11 @@ if (listItems.length > 0) {
         divToAppend.setAttribute('id', `listItem${entry.id}`);
 
         // Create a header to get the todo list item's title
-        let headerDiv = document.createElement('header');
-        headerDiv.setAttribute('style', 'width: 100%;');
-
-        headerDiv.setAttribute('class', 'w3-container w3-blue');
+        let headerArea = document.createElement('header');
+        headerArea.setAttribute('class', 'w3-container w3-blue');
         let todoHeader = document.createElement('h3');
         todoHeader.innerText = entry.title;
-        headerDiv.appendChild(todoHeader)
+        headerArea.appendChild(todoHeader);
 
         // the div where the todolist Item's data will go
         let paragraphDiv = document.createElement('div')
@@ -44,7 +42,7 @@ if (listItems.length > 0) {
         todoParagraph.innerText = entry.text;
         paragraphDiv.appendChild(todoParagraph);
         document.getElementById('listContainer').appendChild(divToAppend);
-        document.getElementById(`listItem${entry.id}`).appendChild(headerDiv);
+        document.getElementById(`listItem${entry.id}`).appendChild(headerArea);
         document.getElementById(`listItem${entry.id}`).appendChild(paragraphDiv);
         document.getElementById(`listItem${entry.id}`).appendChild(removeSpan);
 
@@ -53,8 +51,8 @@ if (listItems.length > 0) {
 
 document.getElementById('addTodoButton').addEventListener('click', function () {
     let divToAppend = document.createElement('div');
-    divToAppend.setAttribute('class', 'w3-container w3-card');
-    // Advanced the number of items by one
+    divToAppend.setAttribute('class', 'w3-card-2 w3-display-container  w3-section');
+    // Create a new UUID for the item
     let instancedUUID = uuid();
     divToAppend.setAttribute('id', `listItem${instancedUUID}`);
     let todoText = document.getElementById('todoInputText').value;
@@ -64,41 +62,49 @@ document.getElementById('addTodoButton').addEventListener('click', function () {
     } else {
         todoTitle = 'No Subject';
     }
-    let removeSpan = document.createElement('button');
     let itemToStore = {
         // We need to store an ID to reference this by in the storage controller function
         id: instancedUUID,
         text: todoText,
         title: todoTitle
     }
+    // Create a header to get the todo list item's title
+    let headerArea = document.createElement('header');
+    headerArea.setAttribute('class', 'w3-container w3-blue');
+    let todoHeader = document.createElement('h3');
+    todoHeader.innerText = todoTitle;
+    headerArea.appendChild(todoHeader);
+
     listItems.push(itemToStore);
     // Store the todo value in localStorage
     localStorage.listItems = JSON.stringify(listItems);
     console.log(localStorage.listItems);
-
-    // Create a header to get the todo list item's title
 
     // the div where the todolist Item's data will go
     let paragraphDiv = document.createElement('div')
     paragraphDiv.setAttribute('class', 'w3-container');
     let todoParagraph = document.createElement('p');
     todoParagraph.innerText = todoText;
-    // Create the button to then append
+    // The button used to remove the item
+    let removeSpan = document.createElement('i');
+    // Create  the button to then append
     removeSpan.addEventListener('click', function () {
         removeItem(instancedUUID);
     });
-    removeSpan.setAttribute('class', 'w3-button w3-blue w3-right');
-    removeSpan.innerText = 'Remove';
-
+    removeSpan.setAttribute('class', 'material-icons w3-xlarge w3-display-topright w3-blue');
+    removeSpan.innerText = 'close';
     paragraphDiv.appendChild(todoParagraph);
-    divToAppend.appendChild(paragraphDiv)
+    divToAppend.appendChild(paragraphDiv);
     document.getElementById('listContainer').appendChild(divToAppend);
+    document.getElementById(`listItem${instancedUUID}`).appendChild(headerArea);
     document.getElementById(`listItem${instancedUUID}`).appendChild(removeSpan);
+
+
     // Re-hide the modal
     document.getElementById('inputModal').style.display = 'none';
-    //Reset the modal value
+    // Reset the modal values
     document.getElementById('todoInputText').value = '';
-
+    document.getElementById('todoInputSubject').value = '';
 })
 
 function removeItem(id) {
