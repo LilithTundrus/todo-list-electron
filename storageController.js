@@ -1,11 +1,11 @@
 'use strict';
 // This is where we get and retrieve the local storage for the user's TODO list
-
 function retrieveTodoListItems() {
     if (localStorage.listItems) {
         return JSON.parse(localStorage.listItems);
     } else {
         localStorage.setItem('listItems', JSON.stringify(new Array()));
+        // return an empty array to prevent the function returning null and causing issues
         return localStorage.listItems;
     }
 }
@@ -25,7 +25,7 @@ function removeTodoListItemByID(id) {
 }
 
 function resetListItems() {
-    localStorage.setItem('listItems', JSON.stringify(new Array()));
+    return localStorage.setItem('listItems', JSON.stringify(new Array()));
 }
 
 module.exports.resetListItems = resetListItems;
