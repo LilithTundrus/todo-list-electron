@@ -5,7 +5,6 @@ document.getElementById('plusButton').addEventListener('click', function () {
 })
 
 let listItems = controller.retrieveTodoListItems();
-
 // Restore the old todo entries
 if (listItems.length > 0) {
     console.log(listItems)
@@ -72,6 +71,8 @@ if (listItems.length > 0) {
         document.getElementById(`listItem${entry.id}`).appendChild(completedCheckBox);
     })
 }
+
+
 
 document.getElementById('addTodoButton').addEventListener('click', function () {
     let divToAppend = document.createElement('div');
