@@ -14,7 +14,7 @@ if (listItems.length > 0) {
         // Create the main div card to attach the note data to
         let divToAppend = document.createElement('div');
         // Set the attributes and stylings we need
-        divToAppend.setAttribute('class', 'w3-card-2 w3-display-container  w3-section');
+        divToAppend.setAttribute('class', 'w3-card-2 w3-display-container  w3-section w3-hover-shadow');
         divToAppend.setAttribute('style', 'width: 100%;');
         divToAppend.setAttribute('id', `listItem${entry.id}`);
 
@@ -41,6 +41,11 @@ if (listItems.length > 0) {
         });
         removeSpan.setAttribute('class', 'material-icons w3-xlarge w3-display-topright w3-blue');
         removeSpan.innerText = 'close';
+
+        // Put the checkbox here to mark as done yes/no and have the item turn green
+
+
+        // Put the edit button here
 
         document.getElementById('listContainer').appendChild(divToAppend);
         document.getElementById(`listItem${entry.id}`).appendChild(headerArea);
