@@ -39,11 +39,29 @@ if (listItems.length > 0) {
         removeSpan.addEventListener('click', function () {
             removeItem(entry.id);
         });
-        removeSpan.setAttribute('class', 'material-icons w3-xlarge w3-display-topright w3-blue');
+        removeSpan.setAttribute('class', 'material-icons w3-xlarge w3-display-topright w3-blue w3-hover-red');
         removeSpan.innerText = 'close';
 
         // Put the checkbox here to mark as done yes/no and have the item turn green
+        let completedCheckBox = document.createElement('i');
+        completedCheckBox.setAttribute('class', 'material-icons w3-xlarge w3-display-topleft')
+        completedCheckBox.innerText = 'check_box_outline_blank';
 
+        if (entry.completed == true) {
+            completedCheckBox.innerText = 'check_box';
+        }
+
+        completedCheckBox.addEventListener('click', function () {
+            // mark the item as completed in the localSotrage
+            if (completedCheckBox.innerText == 'check_box') {
+                completedCheckBox.innerText = 'check_box_outline_blank';
+                // Update the items status by ID
+                toggleCompletedStatus(false, entry.id)
+            } else {
+                completedCheckBox.innerText = 'check_box';
+                toggleCompletedStatus(true, entry.id)
+            }
+        });
 
         // Put the edit button here
 
@@ -51,7 +69,7 @@ if (listItems.length > 0) {
         document.getElementById(`listItem${entry.id}`).appendChild(headerArea);
         document.getElementById(`listItem${entry.id}`).appendChild(paragraphDiv);
         document.getElementById(`listItem${entry.id}`).appendChild(removeSpan);
-
+        document.getElementById(`listItem${entry.id}`).appendChild(completedCheckBox);
     })
 }
 
@@ -71,9 +89,12 @@ document.getElementById('addTodoButton').addEventListener('click', function () {
     let itemToStore = {
         id: instancedUUID,
         text: todoText,
-        title: todoTitle
+        title: todoTitle,
+        completed: false
     }
+    listItems.push(itemToStore);
     localStorage.listItems = JSON.stringify(listItems);
+
     console.log(localStorage.listItems);
 
     // Create a header to get the todo list item's title
@@ -83,7 +104,6 @@ document.getElementById('addTodoButton').addEventListener('click', function () {
     todoHeader.innerText = todoTitle;
     headerArea.appendChild(todoHeader);
 
-    listItems.push(itemToStore);
     // Store the todo value in localStorage
 
 
@@ -101,7 +121,7 @@ document.getElementById('addTodoButton').addEventListener('click', function () {
     removeSpan.addEventListener('click', function () {
         removeItem(instancedUUID);
     });
-    removeSpan.setAttribute('class', 'material-icons w3-xlarge w3-display-topright w3-blue');
+    removeSpan.setAttribute('class', 'material-icons w3-xlarge w3-display-topright w3-blue w3-hover-red');
     removeSpan.innerText = 'close';
 
     document.getElementById('listContainer').appendChild(divToAppend);
@@ -120,5 +140,9 @@ document.getElementById('addTodoButton').addEventListener('click', function () {
 function removeItem(id) {
     document.getElementById(`listItem${id}`).style.display = 'none';
     return controller.removeTodoListItemByID(id);
+}
+
+function toggleCompletedStatus(statusBool, id) {
+    return controller.updateTodoListItemCompleteStatusByID(statusBool, id)
 }
 
