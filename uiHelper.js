@@ -1,13 +1,10 @@
 'use strict';
-// Display the input modal when the plus button is used
-document.getElementById('plusButton').addEventListener('click', function () {
-    document.getElementById('inputModal').style.display = 'block';
-})
 
 let listItems = controller.retrieveTodoListItems();
 // Restore the old todo entries
+// there's likely a way better way of doing this!
 if (listItems.length > 0) {
-    console.log(listItems)
+    console.log(listItems);
     // Put each element into the DOM
     listItems.forEach((entry, index) => {
         // Create the main div card to attach the note data to
@@ -30,7 +27,6 @@ if (listItems.length > 0) {
         let todoParagraph = document.createElement('p');
         todoParagraph.innerText = entry.text;
         paragraphDiv.appendChild(todoParagraph);
-
 
         // The button used to remove the item
         let removeSpan = document.createElement('i');
@@ -73,7 +69,7 @@ if (listItems.length > 0) {
 }
 
 
-
+// #region eventListeners1
 document.getElementById('addTodoButton').addEventListener('click', function () {
     let divToAppend = document.createElement('div');
     divToAppend.setAttribute('class', 'w3-card-2 w3-display-container  w3-section');
@@ -106,8 +102,6 @@ document.getElementById('addTodoButton').addEventListener('click', function () {
     headerArea.appendChild(todoHeader);
 
     // Store the todo value in localStorage
-
-
     // the div where the todolist Item's data will go
     let paragraphDiv = document.createElement('div')
     paragraphDiv.setAttribute('class', 'w3-container');
@@ -138,6 +132,44 @@ document.getElementById('addTodoButton').addEventListener('click', function () {
     document.getElementById('todoInputSubject').value = '';
 })
 
+// Display the input modal when the plus button is used
+document.getElementById('plusButton').addEventListener('click', function () {
+    document.getElementById('inputModal').style.display = 'block';
+})
+
+// Filter the set of todo items by their 'completed' value
+document.getElementById('incompleteFilter').addEventListener('click', function () {
+    // get each existing div and check for the innerText of the checkbox
+    // <i> element, then if it's checked as  incomplete, hide the item
+    let mainDiv = document.getElementById('listContainer');
+    Array.prototype.forEach.call(mainDiv.children, child => {
+        // check the innerText of all element for a checkbox
+        if (child.innerText.includes('closecheck_box') && !child.innerText.includes('closecheck_box_outline_blank')) {
+            console.log(child.innerText);
+            child.style.display = 'none';
+        }
+    });
+})
+
+// Filter the set of todo items by their 'completed' value
+document.getElementById('completedFilter').addEventListener('click', function () {
+    // get each existing div and check for the innerText of the checkbox
+    // <i> element, then if it's checked as  incomplete, hide the item
+    let mainDiv = document.getElementById('listContainer');
+    Array.prototype.forEach.call(mainDiv.children, child => {
+        // check the innerText of all element for a checkbox
+        if (child.innerText.includes('closecheck_box_outline_blank')) {
+            console.log(child.innerText);
+            child.style.display = 'none';
+        }
+    });
+})
+
+
+
+
+// #endregion
+
 function removeItem(id) {
     document.getElementById(`listItem${id}`).style.display = 'none';
     return controller.removeTodoListItemByID(id);
@@ -146,4 +178,3 @@ function removeItem(id) {
 function toggleCompletedStatus(statusBool, id) {
     return controller.updateTodoListItemCompleteStatusByID(statusBool, id)
 }
-
