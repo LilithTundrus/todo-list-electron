@@ -147,6 +147,8 @@ document.getElementById('incompleteFilter').addEventListener('click', function (
         if (child.innerText.includes('closecheck_box') && !child.innerText.includes('closecheck_box_outline_blank')) {
             console.log(child.innerText);
             child.style.display = 'none';
+        } else {
+            child.style.display = 'block';
         }
     });
 })
@@ -161,6 +163,8 @@ document.getElementById('completedFilter').addEventListener('click', function ()
         if (child.innerText.includes('closecheck_box_outline_blank')) {
             console.log(child.innerText);
             child.style.display = 'none';
+        } else {
+            child.style.display = 'block';
         }
     });
 })
