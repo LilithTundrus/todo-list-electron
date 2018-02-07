@@ -68,8 +68,7 @@ if (listItems.length > 0) {
     })
 }
 
-
-// #region eventListeners1
+// #region eventListeners
 document.getElementById('addTodoButton').addEventListener('click', function () {
     let divToAppend = document.createElement('div');
     divToAppend.setAttribute('class', 'w3-card-2 w3-display-container  w3-section');
@@ -137,7 +136,6 @@ document.getElementById('plusButton').addEventListener('click', function () {
     document.getElementById('inputModal').style.display = 'block';
 })
 
-// Filter the set of todo items by their 'completed' value
 document.getElementById('incompleteFilter').addEventListener('click', function () {
     // get each existing div and check for the innerText of the checkbox
     // <i> element, then if it's checked as  incomplete, hide the item
@@ -153,10 +151,9 @@ document.getElementById('incompleteFilter').addEventListener('click', function (
     });
 })
 
-// Filter the set of todo items by their 'completed' value
 document.getElementById('completedFilter').addEventListener('click', function () {
     // get each existing div and check for the innerText of the checkbox
-    // <i> element, then if it's checked as  incomplete, hide the item
+    // <i> element, then if it's checked as  completed, hide the item
     let mainDiv = document.getElementById('listContainer');
     Array.prototype.forEach.call(mainDiv.children, child => {
         // check the innerText of all element for a checkbox
@@ -168,10 +165,6 @@ document.getElementById('completedFilter').addEventListener('click', function ()
         }
     });
 })
-
-
-
-
 // #endregion
 
 function removeItem(id) {
