@@ -165,6 +165,13 @@ document.getElementById('completedFilter').addEventListener('click', function ()
         }
     });
 })
+document.getElementById('resetFilter').addEventListener('click', function () {
+    // reset the filters
+    let mainDiv = document.getElementById('listContainer');
+    Array.prototype.forEach.call(mainDiv.children, child => {
+        child.style.display = 'block';
+    });
+})
 // #endregion
 
 function removeItem(id) {
