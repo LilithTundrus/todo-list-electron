@@ -140,6 +140,8 @@ document.getElementById('incompleteFilter').addEventListener('click', function (
     // get each existing div and check for the innerText of the checkbox
     // <i> element, then if it's checked as  incomplete, hide the item
     let mainDiv = document.getElementById('listContainer');
+    this.setAttribute('class', 'w3-text-blue');
+    document.getElementById('completedFilter').setAttribute('class', 'w3-text-black');
     Array.prototype.forEach.call(mainDiv.children, child => {
         // check the innerText of all element for a checkbox
         if (child.innerText.includes('closecheck_box') && !child.innerText.includes('closecheck_box_outline_blank')) {
@@ -155,6 +157,8 @@ document.getElementById('completedFilter').addEventListener('click', function ()
     // get each existing div and check for the innerText of the checkbox
     // <i> element, then if it's checked as  completed, hide the item
     let mainDiv = document.getElementById('listContainer');
+    this.setAttribute('class', 'w3-text-blue');
+    document.getElementById('incompleteFilter').setAttribute('class', 'w3-text-black');
     Array.prototype.forEach.call(mainDiv.children, child => {
         // check the innerText of all element for a checkbox
         if (child.innerText.includes('closecheck_box_outline_blank')) {
@@ -168,6 +172,9 @@ document.getElementById('completedFilter').addEventListener('click', function ()
 document.getElementById('resetFilter').addEventListener('click', function () {
     // reset the filters
     let mainDiv = document.getElementById('listContainer');
+    document.getElementById('incompleteFilter').setAttribute('class', 'w3-text-black');
+    document.getElementById('completedFilter').setAttribute('class', 'w3-text-black');
+
     Array.prototype.forEach.call(mainDiv.children, child => {
         child.style.display = 'block';
     });
