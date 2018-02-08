@@ -17,6 +17,7 @@ if (listItems.length > 0) {
         // Create a header to get the todo list item's title
         let headerArea = document.createElement('header');
         headerArea.setAttribute('class', 'w3-container w3-blue');
+        headerArea.setAttribute('id', 'todoHeader');
         let todoHeader = document.createElement('h3');
         todoHeader.innerText = entry.title;
         headerArea.appendChild(todoHeader);
@@ -63,6 +64,18 @@ if (listItems.length > 0) {
         editLink.setAttribute('class', 'w3-display-bottomright');
         editLink.setAttribute('href', '#');
         editLink.innerText = 'Edit...';
+        editLink.addEventListener('click', function () {
+            // display the edit modal
+            // on change, update the listItem and push to localStorage
+            // reload the set of notes
+
+            // fill in the data before showing the modal
+            let oldTtitle = this.parentElement.getElementsByClassName('w3-container w3-blue')[0].innerText;
+            document.getElementById('newInputSubject').value = oldTtitle;
+            let oldText = this.parentElement.getElementsByClassName('w3-container')[1].innerText;
+            document.getElementById('newInputText').value = oldText;
+            document.getElementById('editModal').style.display = 'block';
+        })
 
         document.getElementById('listContainer').appendChild(divToAppend);
         document.getElementById(`listItem${entry.id}`).appendChild(headerArea);
