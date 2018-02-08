@@ -156,8 +156,7 @@ document.getElementById('changeTodoButton').addEventListener('click', function (
     let mainDiv = document.getElementById('listContainer');
     document.getElementById('incompleteFilter').setAttribute('class', 'w3-text-black');
     Array.prototype.forEach.call(mainDiv.children, child => {
-        // check the innerText of all element for a checkbox
-        console.log(child)
+        console.log(child);
     });
     // get the ID of the item to modify
 
