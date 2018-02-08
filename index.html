@@ -20,6 +20,7 @@
             <button id="plusButton" class="w3-circle w3-blue w3-button w3-xlarge">+</button>
         </div>
         <!-- Pull up a w3-model on click for text input -->
+        <!-- // TODO: Add a cnacel button to this that works -->
         <div id="inputModal" class="w3-modal">
             <div class="w3-modal-content w3-animate-bottom w3-card-4 ">
                 <header class="w3-container w3-blue">
@@ -34,6 +35,8 @@
                             <input id="todoInputText" class="w3-input w3-section" type="text">
                             <br>
                             <button id="addTodoButton" class="w3-button w3-light-blue">Add</button>
+                            <button id="addCancelButton" class="w3-button w3-light-grey" onclick="document.getElementById('inputModal').style.display='none'">Cancel</button>
+
                         </p>
                     </div>
                 </header>
@@ -56,7 +59,7 @@
                             <input id="newInputText" class="w3-input w3-section" type="text">
                             <br>
                             <button id="changeTodoButton" class="w3-button w3-light-blue">Make Changes</button>
-                            <button id="changeTodoButton" class="w3-button w3-light-grey">Cancel</button>
+                            <button id="changeCancelButton" class="w3-button w3-light-grey" onclick="document.getElementById('editModal').style.display='none'">Cancel</button>
 
                         </p>
                     </div>
@@ -64,11 +67,13 @@
             </div>
         </div>
     </div>
+
     <div id="listContainer" class="w3-container">
         <h3>Click the '+' button to add an item</h3>
         <br>
         <br>
     </div>
+
     <div class="w3-center">Filter by:
         <a href="#" id="completedFilter">Completed</a> or
         <a href="#" id="incompleteFilter">Incomplete</a>
@@ -85,10 +90,10 @@
     // Uncomment this if you need to reset the local storage: controller.resetListItems();
     // TODO: Allow for existing items to be edited
     function uuid() {
-        var uuid = "", i, random;
+        var uuid = " ", i, random;
         for (i = 0; i < 32; i++) {
             random = Math.random() * 16 | 0;
-            if (i == 8 || i == 12 || i == 16 || i == 20) { uuid += "-"; }
+            if (i == 8 || i == 12 || i == 16 || i == 20) { uuid += "- "; }
             uuid += (i == 12 ? 4 : (i == 16 ? (random & 3 | 8) : random)).toString(16);
         }
         return uuid;
