@@ -59,11 +59,16 @@ if (listItems.length > 0) {
         });
 
         // Put the edit button here
+        let editLink = document.createElement('a');
+        editLink.setAttribute('class', 'w3-display-bottomright');
+        editLink.setAttribute('href', '#');
+        editLink.innerText = 'Edit...';
 
         document.getElementById('listContainer').appendChild(divToAppend);
         document.getElementById(`listItem${entry.id}`).appendChild(headerArea);
         document.getElementById(`listItem${entry.id}`).appendChild(paragraphDiv);
         document.getElementById(`listItem${entry.id}`).appendChild(removeSpan);
+        document.getElementById(`listItem${entry.id}`).appendChild(editLink);
         document.getElementById(`listItem${entry.id}`).appendChild(completedCheckBox);
     })
 }
@@ -144,8 +149,8 @@ document.getElementById('incompleteFilter').addEventListener('click', function (
     document.getElementById('completedFilter').setAttribute('class', 'w3-text-black');
     Array.prototype.forEach.call(mainDiv.children, child => {
         // check the innerText of all element for a checkbox
-        if (child.innerText.includes('closecheck_box') && !child.innerText.includes('closecheck_box_outline_blank')) {
-            console.log(child.innerText);
+        console.log(child.innerText)
+        if (child.innerText.includes('closeEdit...check_box') && !child.innerText.includes('closeEdit...check_box_outline_blank')) {
             child.style.display = 'none';
         } else {
             child.style.display = 'block';
@@ -161,8 +166,7 @@ document.getElementById('completedFilter').addEventListener('click', function ()
     document.getElementById('incompleteFilter').setAttribute('class', 'w3-text-black');
     Array.prototype.forEach.call(mainDiv.children, child => {
         // check the innerText of all element for a checkbox
-        if (child.innerText.includes('closecheck_box_outline_blank')) {
-            console.log(child.innerText);
+        if (child.innerText.includes('closeEdit...check_box_outline_blank')) {
             child.style.display = 'none';
         } else {
             child.style.display = 'block';
@@ -174,7 +178,6 @@ document.getElementById('resetFilter').addEventListener('click', function () {
     let mainDiv = document.getElementById('listContainer');
     document.getElementById('incompleteFilter').setAttribute('class', 'w3-text-black');
     document.getElementById('completedFilter').setAttribute('class', 'w3-text-black');
-
     Array.prototype.forEach.call(mainDiv.children, child => {
         child.style.display = 'block';
     });
