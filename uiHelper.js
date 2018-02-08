@@ -65,11 +65,7 @@ if (listItems.length > 0) {
         editLink.setAttribute('href', '#');
         editLink.innerText = 'Edit...';
         editLink.addEventListener('click', function () {
-            // display the edit modal
-            // on change, update the listItem and push to localStorage
-            // reload the set of notes
 
-            // fill in the data before showing the modal
             let oldTtitle = this.parentElement.getElementsByClassName('w3-container w3-blue')[0].innerText;
             document.getElementById('newInputSubject').value = oldTtitle;
             let oldText = this.parentElement.getElementsByClassName('w3-container')[1].innerText;
@@ -147,6 +143,18 @@ document.getElementById('addTodoButton').addEventListener('click', function () {
     // Reset the modal values
     document.getElementById('todoInputText').value = '';
     document.getElementById('todoInputSubject').value = '';
+})
+
+document.getElementById('changeTodoButton').addEventListener('click', function () {
+    document.getElementById('editModal').style.display = 'none';
+    // display the edit modal
+    // on change, update the listItem and push to localStorage
+    // reload the set of notes
+    let newSubject = document.getElementById('newInputSubject').value;
+    let newText = document.getElementById('newInputText').value;
+    console.log(newSubject, newText);
+
+    // fill in the data before showing the modal
 })
 
 // Display the input modal when the plus button is used
