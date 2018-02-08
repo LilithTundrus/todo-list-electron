@@ -153,10 +153,18 @@ document.getElementById('changeTodoButton').addEventListener('click', function (
     let newSubject = document.getElementById('newInputSubject').value;
     let newText = document.getElementById('newInputText').value;
     console.log(newSubject, newText);
+    let mainDiv = document.getElementById('listContainer');
+    document.getElementById('incompleteFilter').setAttribute('class', 'w3-text-black');
+    Array.prototype.forEach.call(mainDiv.children, child => {
+        // check the innerText of all element for a checkbox
+        console.log(child)
+    });
+    // get the ID of the item to modify
 
     // fill in the data before showing the modal
 })
 
+// TODO: Actually have this match the initial renders!!!!!
 // Display the input modal when the plus button is used
 document.getElementById('plusButton').addEventListener('click', function () {
     document.getElementById('inputModal').style.display = 'block';
@@ -194,6 +202,7 @@ document.getElementById('completedFilter').addEventListener('click', function ()
         }
     });
 })
+
 document.getElementById('resetFilter').addEventListener('click', function () {
     // reset the filters
     let mainDiv = document.getElementById('listContainer');
