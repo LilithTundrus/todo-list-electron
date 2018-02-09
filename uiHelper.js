@@ -1,11 +1,8 @@
 'use strict';
-
 let oldSubjHolder;
 let oldTextHolder;
-
 let listItems = controller.retrieveTodoListItems();
-// Restore the old todo entries
-// there's likely a way better way of doing this!
+// Restore the old todo entries, there's likely a way better way of doing this!
 if (listItems.length > 0) {
     console.log(listItems);
     // Put each element into the DOM
@@ -87,6 +84,8 @@ if (listItems.length > 0) {
 }
 
 // #region eventListeners
+
+// TODO: add all of the fancy UI stuff from above
 document.getElementById('addTodoButton').addEventListener('click', function () {
     let divToAppend = document.createElement('div');
     divToAppend.setAttribute('class', 'w3-card-2 w3-display-container  w3-section');
@@ -152,12 +151,9 @@ document.getElementById('addTodoButton').addEventListener('click', function () {
 // this is so damn janky
 document.getElementById('changeTodoButton').addEventListener('click', function () {
     document.getElementById('editModal').style.display = 'none';
-    // display the edit modal
-    // on change, update the listItem and push to localStorage
-    // reload the set of notes
+    // display the edit modalm on change, update the listItem and push to localStorage
     let newSubject = document.getElementById('newInputSubject').value;
     let newText = document.getElementById('newInputText').value;
-    console.log(newSubject, newText);
     let mainDiv = document.getElementById('listContainer');
     // Iterate through each todo item
     Array.prototype.forEach.call(mainDiv.children, child => {
@@ -165,18 +161,15 @@ document.getElementById('changeTodoButton').addEventListener('click', function (
         if (child.getElementsByClassName('w3-container w3-blue').length > 0) {
             // define the element to work with
             let workingSubjElem = child.getElementsByClassName('w3-container w3-blue')[0];
-            // debugging
-            console.log(workingSubjElem.innerText);
             // See if the global var matches with this local var
             if (oldSubjHolder == workingSubjElem.innerText) {
                 // resolve for the item's text box as well 
-                console.log('it works!')
+                console.log('Found match to edit')
                 workingSubjElem.innerHTML = `<h3>${newSubject}</h3>`;
                 // no need to check for the second item!
                 if (child.getElementsByClassName('w3-container')) {
                     let workingTextElem = child.getElementsByClassName('w3-container')[1];
                     workingTextElem.innerHTML = `<p>${newText}</p>`;
-                    console.log(child.id);
                     let completetionBool;
                     if (child.innerText.includes('closeEdit...check_box_outline_blank')) {
                         completetionBool = false;
@@ -189,15 +182,14 @@ document.getElementById('changeTodoButton').addEventListener('click', function (
                         title: newSubject,
                         completed: completetionBool
                     }
+                    // rebuild the localStorage data
                     controller.updateItemDataByID(child.id, updatedTodoObj);
                 }
             }
         }
     });
-    // rebuild the localStorage data
 })
 
-// TODO: Actually have this match the initial renders!!!!!
 // Display the input modal when the plus button is used
 document.getElementById('plusButton').addEventListener('click', function () {
     document.getElementById('inputModal').style.display = 'block';
