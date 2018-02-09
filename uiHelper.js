@@ -40,7 +40,7 @@ if (listItems.length > 0) {
 
         // Put the checkbox here to mark as done yes/no and have the item turn green
         let completedCheckBox = document.createElement('i');
-        completedCheckBox.setAttribute('class', 'material-icons w3-xlarge w3-display-topleft')
+        completedCheckBox.setAttribute('class', 'material-icons w3-xlarge w3-display-topleft');
         completedCheckBox.innerText = 'check_box_outline_blank';
 
         if (entry.completed == true) {
@@ -52,10 +52,10 @@ if (listItems.length > 0) {
             if (completedCheckBox.innerText == 'check_box') {
                 completedCheckBox.innerText = 'check_box_outline_blank';
                 // Update the items status by ID
-                toggleCompletedStatus(false, entry.id)
+                toggleCompletedStatus(false, entry.id);
             } else {
                 completedCheckBox.innerText = 'check_box';
-                toggleCompletedStatus(true, entry.id)
+                toggleCompletedStatus(true, entry.id);
             }
         });
 
@@ -104,7 +104,7 @@ document.getElementById('addTodoButton').addEventListener('click', function () {
         text: todoText,
         title: todoTitle,
         completed: false
-    }
+    };
     listItems.push(itemToStore);
     localStorage.listItems = JSON.stringify(listItems);
 
@@ -164,7 +164,7 @@ document.getElementById('changeTodoButton').addEventListener('click', function (
             // See if the global var matches with this local var
             if (oldSubjHolder == workingSubjElem.innerText) {
                 // resolve for the item's text box as well 
-                console.log('Found match to edit')
+                console.log('Found match to edit');
                 workingSubjElem.innerHTML = `<h3>${newSubject}</h3>`;
                 // no need to check for the second item!
                 if (child.getElementsByClassName('w3-container')) {
@@ -181,7 +181,7 @@ document.getElementById('changeTodoButton').addEventListener('click', function (
                         text: newText,
                         title: newSubject,
                         completed: completetionBool
-                    }
+                    };
                     // rebuild the localStorage data
                     controller.updateItemDataByID(child.id, updatedTodoObj);
                 }
@@ -245,5 +245,5 @@ function removeItem(id) {
 }
 
 function toggleCompletedStatus(statusBool, id) {
-    return controller.updateTodoListItemCompleteStatusByID(statusBool, id)
+    return controller.updateTodoListItemCompleteStatusByID(statusBool, id);
 }
