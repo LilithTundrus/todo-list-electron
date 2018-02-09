@@ -140,6 +140,18 @@ document.getElementById('addTodoButton').addEventListener('click', function () {
     completedCheckBox.setAttribute('class', 'material-icons w3-xlarge w3-display-topleft');
     completedCheckBox.innerText = 'check_box_outline_blank';
 
+    completedCheckBox.addEventListener('click', function () {
+        // mark the item as completed in the localSotrage
+        if (completedCheckBox.innerText == 'check_box') {
+            completedCheckBox.innerText = 'check_box_outline_blank';
+            // Update the items status by ID
+            toggleCompletedStatus(false, instancedUUID);
+        } else {
+            completedCheckBox.innerText = 'check_box';
+            toggleCompletedStatus(true, instancedUUID);
+        }
+    });
+
     // Put the edit button here
     let editLink = document.createElement('a');
     editLink.setAttribute('class', 'w3-display-bottomright');
