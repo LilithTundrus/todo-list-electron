@@ -164,14 +164,18 @@ document.getElementById('changeTodoButton').addEventListener('click', function (
         // check if the item has the property we're looking for before defining it
         if (child.getElementsByClassName('w3-container w3-blue').length > 0) {
             // define the element to work with
-            let workingElem = child.getElementsByClassName('w3-container w3-blue')[0];
+            let workingSubjElem = child.getElementsByClassName('w3-container w3-blue')[0];
             // debugging
-            console.log(workingElem.innerText);
+            console.log(workingSubjElem.innerText);
             // See if the global var matches with this local var
-            if (oldSubjHolder == workingElem.innerText) {
+            if (oldSubjHolder == workingSubjElem.innerText) {
+                // resolve for the item's text box as well 
                 console.log('it works!')
-                workingElem.innerHTML = `<h3>${newSubject}</h3>`;
-                // document.write(newSubject)
+                workingSubjElem.innerHTML = `<h3>${newSubject}</h3>`;
+                if (child.getElementsByClassName('w3-container')) {
+                    let workingTextElem = child.getElementsByClassName('w3-container')[1];
+                    workingTextElem.innerHTML = `<p>${newText}</p>`;
+                }
             }
             // check if this box matches the old title and old text values
         }
