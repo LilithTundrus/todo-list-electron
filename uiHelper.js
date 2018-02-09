@@ -15,7 +15,7 @@ if (listItems.length > 0) {
         // Set the attributes and stylings we need
         divToAppend.setAttribute('class', 'w3-card-2 w3-display-container  w3-section w3-hover-shadow');
         divToAppend.setAttribute('style', 'width: 100%;');
-        divToAppend.setAttribute('id', `listItem${entry.id}`);
+        divToAppend.setAttribute('id', entry.id);
 
         // Create a header to get the todo list item's title
         let headerArea = document.createElement('header');
@@ -78,11 +78,11 @@ if (listItems.length > 0) {
         })
 
         document.getElementById('listContainer').appendChild(divToAppend);
-        document.getElementById(`listItem${entry.id}`).appendChild(headerArea);
-        document.getElementById(`listItem${entry.id}`).appendChild(paragraphDiv);
-        document.getElementById(`listItem${entry.id}`).appendChild(removeSpan);
-        document.getElementById(`listItem${entry.id}`).appendChild(editLink);
-        document.getElementById(`listItem${entry.id}`).appendChild(completedCheckBox);
+        document.getElementById(entry.id).appendChild(headerArea);
+        document.getElementById(entry.id).appendChild(paragraphDiv);
+        document.getElementById(entry.id).appendChild(removeSpan);
+        document.getElementById(entry.id).appendChild(editLink);
+        document.getElementById(entry.id).appendChild(completedCheckBox);
     })
 }
 
@@ -91,8 +91,8 @@ document.getElementById('addTodoButton').addEventListener('click', function () {
     let divToAppend = document.createElement('div');
     divToAppend.setAttribute('class', 'w3-card-2 w3-display-container  w3-section');
     // Create a new UUID for the item
-    let instancedUUID = uuid();
-    divToAppend.setAttribute('id', `listItem${instancedUUID}`);
+    let instancedUUID = `lisItem${uuid()}`;
+    divToAppend.setAttribute('id', instancedUUID);
     let todoText = document.getElementById('todoInputText').value;
     let todoTitle;
     if (document.getElementById('todoInputSubject').value.length > 0) {
@@ -137,9 +137,9 @@ document.getElementById('addTodoButton').addEventListener('click', function () {
     removeSpan.innerText = 'close';
 
     document.getElementById('listContainer').appendChild(divToAppend);
-    document.getElementById(`listItem${instancedUUID}`).appendChild(headerArea);
-    document.getElementById(`listItem${instancedUUID}`).appendChild(paragraphDiv);
-    document.getElementById(`listItem${instancedUUID}`).appendChild(removeSpan);
+    document.getElementById(instancedUUID).appendChild(headerArea);
+    document.getElementById(instancedUUID).appendChild(paragraphDiv);
+    document.getElementById(instancedUUID).appendChild(removeSpan);
 
 
     // Re-hide the modal
@@ -248,7 +248,7 @@ document.getElementById('resetFilter').addEventListener('click', function () {
 // #endregion
 
 function removeItem(id) {
-    document.getElementById(`listItem${id}`).style.display = 'none';
+    document.getElementById(id).style.display = 'none';
     return controller.removeTodoListItemByID(id);
 }
 
