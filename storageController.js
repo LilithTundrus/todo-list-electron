@@ -24,6 +24,20 @@ function removeTodoListItemByID(id) {
     localStorage.listItems = JSON.stringify(tempListItemsArray);
 }
 
+function updateItemDataByID(id, newJSONObj) {
+    // Iterate over the localStorage Array and check for an object match
+    console.log(`Searching for id: ${id}`)
+    let tempListItemsArray = JSON.parse(localStorage.listItems);
+    tempListItemsArray.forEach((entry, index) => {
+        if (entry.id == id) {
+            console.log('match!!!! Updating...');
+            return tempListItemsArray.splice(index, 1, newJSONObj)
+        }
+    })
+    // put the new array back into localStorage
+    localStorage.listItems = JSON.stringify(tempListItemsArray);
+}
+
 function updateTodoListItemCompleteStatusByID(statusBool, id) {
     let tempListItemsArray = JSON.parse(localStorage.listItems);
     console.log(`Updating completed status for for id: ${id}`)
@@ -45,3 +59,4 @@ module.exports.resetListItems = resetListItems;
 module.exports.removeTodoListItemByID = removeTodoListItemByID;
 module.exports.retrieveTodoListItems = retrieveTodoListItems;
 module.exports.updateTodoListItemCompleteStatusByID = updateTodoListItemCompleteStatusByID;
+module.exports.updateItemDataByID = updateItemDataByID;
