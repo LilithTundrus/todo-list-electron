@@ -172,18 +172,29 @@ document.getElementById('changeTodoButton').addEventListener('click', function (
                 // resolve for the item's text box as well 
                 console.log('it works!')
                 workingSubjElem.innerHTML = `<h3>${newSubject}</h3>`;
+                // no need to check for the second item!
                 if (child.getElementsByClassName('w3-container')) {
                     let workingTextElem = child.getElementsByClassName('w3-container')[1];
                     workingTextElem.innerHTML = `<p>${newText}</p>`;
+                    console.log(child.id);
+                    let completetionBool;
+                    if (child.innerText.includes('closeEdit...check_box_outline_blank')) {
+                        completetionBool = false;
+                    } else {
+                        completetionBool = true;
+                    }
+                    let updatedTodoObj = {
+                        id: child.id,
+                        text: newText,
+                        title: newSubject,
+                        completed: completetionBool
+                    }
+                    controller.updateItemDataByID(child.id, updatedTodoObj);
                 }
             }
-            // check if this box matches the old title and old text values
         }
-        console.log(child.getElementsByClassName('w3-container w3-blue'));
     });
-    // get the ID of the item to modify
-
-    // fill in the data before showing the modal
+    // rebuild the localStorage data
 })
 
 // TODO: Actually have this match the initial renders!!!!!
