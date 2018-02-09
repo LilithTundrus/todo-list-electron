@@ -1,5 +1,8 @@
 'use strict';
 
+let oldSubjHolder;
+let oldTextHolder;
+
 let listItems = controller.retrieveTodoListItems();
 // Restore the old todo entries
 // there's likely a way better way of doing this!
@@ -65,12 +68,13 @@ if (listItems.length > 0) {
         editLink.setAttribute('href', '#');
         editLink.innerText = 'Edit...';
         editLink.addEventListener('click', function () {
-
             let oldTtitle = this.parentElement.getElementsByClassName('w3-container w3-blue')[0].innerText;
             document.getElementById('newInputSubject').value = oldTtitle;
             let oldText = this.parentElement.getElementsByClassName('w3-container')[1].innerText;
             document.getElementById('newInputText').value = oldText;
             document.getElementById('editModal').style.display = 'block';
+            oldSubjHolder = oldTtitle;
+            oldTextHolder = oldText;
         })
 
         document.getElementById('listContainer').appendChild(divToAppend);
@@ -145,6 +149,7 @@ document.getElementById('addTodoButton').addEventListener('click', function () {
     document.getElementById('todoInputSubject').value = '';
 })
 
+// this is so damn janky
 document.getElementById('changeTodoButton').addEventListener('click', function () {
     document.getElementById('editModal').style.display = 'none';
     // display the edit modal
@@ -154,9 +159,23 @@ document.getElementById('changeTodoButton').addEventListener('click', function (
     let newText = document.getElementById('newInputText').value;
     console.log(newSubject, newText);
     let mainDiv = document.getElementById('listContainer');
-    document.getElementById('incompleteFilter').setAttribute('class', 'w3-text-black');
+    // Iterate through each todo item
     Array.prototype.forEach.call(mainDiv.children, child => {
-        console.log(child);
+        // check if the item has the property we're looking for before defining it
+        if (child.getElementsByClassName('w3-container w3-blue').length > 0) {
+            // define the element to work with
+            let workingElem = child.getElementsByClassName('w3-container w3-blue')[0];
+            // debugging
+            console.log(workingElem.innerText);
+            // See if the global var matches with this local var
+            if (oldSubjHolder == workingElem.innerText) {
+                console.log('it works!')
+                workingElem.innerHTML = `<h3>${newSubject}</h3>`;
+                // document.write(newSubject)
+            }
+            // check if this box matches the old title and old text values
+        }
+        console.log(child.getElementsByClassName('w3-container w3-blue'));
     });
     // get the ID of the item to modify
 
