@@ -105,19 +105,20 @@ document.getElementById('addTodoButton').addEventListener('click', function () {
         title: todoTitle,
         completed: false
     };
+    // Store the todo value in localStorage
     listItems.push(itemToStore);
     localStorage.listItems = JSON.stringify(listItems);
-
+    // debugging
     console.log(localStorage.listItems);
 
     // Create a header to get the todo list item's title
     let headerArea = document.createElement('header');
     headerArea.setAttribute('class', 'w3-container w3-blue');
+    headerArea.setAttribute('id', 'todoHeader');
     let todoHeader = document.createElement('h3');
     todoHeader.innerText = todoTitle;
     headerArea.appendChild(todoHeader);
 
-    // Store the todo value in localStorage
     // the div where the todolist Item's data will go
     let paragraphDiv = document.createElement('div')
     paragraphDiv.setAttribute('class', 'w3-container');
@@ -125,20 +126,41 @@ document.getElementById('addTodoButton').addEventListener('click', function () {
     todoParagraph.innerText = todoText;
     paragraphDiv.appendChild(todoParagraph);
 
-
     // The button used to remove the item
     let removeSpan = document.createElement('i');
     // Create  the button to then append
     removeSpan.addEventListener('click', function () {
-        removeItem(instancedUUID);
+        removeItem(entry.id);
     });
     removeSpan.setAttribute('class', 'material-icons w3-xlarge w3-display-topright w3-blue w3-hover-red');
     removeSpan.innerText = 'close';
+
+    // Put the checkbox here to mark as done yes/no and have the item turn green
+    let completedCheckBox = document.createElement('i');
+    completedCheckBox.setAttribute('class', 'material-icons w3-xlarge w3-display-topleft');
+    completedCheckBox.innerText = 'check_box_outline_blank';
+
+    // Put the edit button here
+    let editLink = document.createElement('a');
+    editLink.setAttribute('class', 'w3-display-bottomright');
+    editLink.setAttribute('href', '#');
+    editLink.innerText = 'Edit...';
+    editLink.addEventListener('click', function () {
+        let oldTtitle = this.parentElement.getElementsByClassName('w3-container w3-blue')[0].innerText;
+        document.getElementById('newInputSubject').value = oldTtitle;
+        let oldText = this.parentElement.getElementsByClassName('w3-container')[1].innerText;
+        document.getElementById('newInputText').value = oldText;
+        document.getElementById('editModal').style.display = 'block';
+        oldSubjHolder = oldTtitle;
+        oldTextHolder = oldText;
+    })
 
     document.getElementById('listContainer').appendChild(divToAppend);
     document.getElementById(instancedUUID).appendChild(headerArea);
     document.getElementById(instancedUUID).appendChild(paragraphDiv);
     document.getElementById(instancedUUID).appendChild(removeSpan);
+    document.getElementById(instancedUUID).appendChild(editLink);
+    document.getElementById(instancedUUID).appendChild(completedCheckBox);
 
 
     // Re-hide the modal
