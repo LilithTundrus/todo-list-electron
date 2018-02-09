@@ -3,7 +3,7 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Todo List 0.0.4</title>
+    <title>Todo List 0.0.5</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- for when we do JS, require it here -->
@@ -11,7 +11,7 @@
 
 <body>
     <div class="w3-container w3-blue">
-        <h1>Todo List 0.0.4</h1>
+        <h1>Todo List 0.0.5</h1>
     </div>
     <!-- Our Main container -->
     <div class="w3-display-container">
@@ -20,7 +20,6 @@
             <button id="plusButton" class="w3-circle w3-blue w3-button w3-xlarge">+</button>
         </div>
         <!-- Pull up a w3-model on click for text input -->
-        <!-- // TODO: Add a cnacel button to this that works -->
         <div id="inputModal" class="w3-modal">
             <div class="w3-modal-content w3-animate-bottom w3-card-4 ">
                 <header class="w3-container w3-blue">
@@ -36,7 +35,6 @@
                             <br>
                             <button id="addTodoButton" class="w3-button w3-light-blue">Add</button>
                             <button id="addCancelButton" class="w3-button w3-light-grey" onclick="document.getElementById('inputModal').style.display='none'">Cancel</button>
-
                         </p>
                     </div>
                 </header>
@@ -60,7 +58,6 @@
                             <br>
                             <button id="changeTodoButton" class="w3-button w3-light-blue">Make Changes</button>
                             <button id="changeCancelButton" class="w3-button w3-light-grey" onclick="document.getElementById('editModal').style.display='none'">Cancel</button>
-
                         </p>
                     </div>
                 </header>
