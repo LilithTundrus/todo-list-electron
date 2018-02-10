@@ -130,7 +130,7 @@ document.getElementById('addTodoButton').addEventListener('click', function () {
     let removeSpan = document.createElement('i');
     // Create  the button to then append
     removeSpan.addEventListener('click', function () {
-        removeItem(entry.id);
+        removeItem(instancedUUID);
     });
     removeSpan.setAttribute('class', 'material-icons w3-xlarge w3-display-topright w3-blue w3-hover-red');
     removeSpan.innerText = 'close';
@@ -274,7 +274,7 @@ document.getElementById('resetFilter').addEventListener('click', function () {
 // #endregion
 
 function removeItem(id) {
-    document.getElementById(id).style.display = 'none';
+    document.getElementById(id).remove();
     return controller.removeTodoListItemByID(id);
 }
 
