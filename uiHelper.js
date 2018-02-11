@@ -43,6 +43,7 @@ if (listItems.length > 0) {
         completedCheckBox.setAttribute('class', 'material-icons w3-xlarge w3-display-topleft');
         completedCheckBox.innerText = 'check_box_outline_blank';
 
+        // Check whether or not the list item is completed
         if (entry.completed == true) {
             completedCheckBox.innerText = 'check_box';
         }
@@ -59,7 +60,7 @@ if (listItems.length > 0) {
             }
         });
 
-        // Put the edit button here
+        // Edit button and all the functionality
         let editLink = document.createElement('a');
         editLink.setAttribute('class', 'w3-display-bottomright');
         editLink.setAttribute('href', '#');
@@ -70,10 +71,13 @@ if (listItems.length > 0) {
             let oldText = this.parentElement.getElementsByClassName('w3-container')[1].innerText;
             document.getElementById('newInputText').value = oldText;
             document.getElementById('editModal').style.display = 'block';
+            // Store the item temporarily as a global
+            // This may eventually cause issues
             oldSubjHolder = oldTtitle;
             oldTextHolder = oldText;
         })
 
+        // Append all of the elments together
         document.getElementById('listContainer').appendChild(divToAppend);
         document.getElementById(entry.id).appendChild(headerArea);
         document.getElementById(entry.id).appendChild(paragraphDiv);
@@ -84,8 +88,6 @@ if (listItems.length > 0) {
 }
 
 // #region eventListeners
-
-// TODO: add all of the fancy UI stuff from above
 document.getElementById('addTodoButton').addEventListener('click', function () {
     let divToAppend = document.createElement('div');
     divToAppend.setAttribute('class', 'w3-card-2 w3-display-container  w3-section');
@@ -152,7 +154,7 @@ document.getElementById('addTodoButton').addEventListener('click', function () {
         }
     });
 
-    // Put the edit button here
+    // Edit button and all the functionality
     let editLink = document.createElement('a');
     editLink.setAttribute('class', 'w3-display-bottomright');
     editLink.setAttribute('href', '#');
@@ -273,11 +275,22 @@ document.getElementById('resetFilter').addEventListener('click', function () {
 })
 // #endregion
 
+/**
+ * Remove an item from the HTML DOM AND local storage
+ * @param {String} id 
+ * @returns {function & void}
+ */
 function removeItem(id) {
     document.getElementById(id).remove();
     return controller.removeTodoListItemByID(id);
 }
 
+/**
+ * Change the completed/incomplete status checkbox for an item in localStorage
+ * @param {Boolean} statusBool 
+ * @param {String} id 
+ * @returns {function & void}
+ */
 function toggleCompletedStatus(statusBool, id) {
     return controller.updateTodoListItemCompleteStatusByID(statusBool, id);
 }
