@@ -3,6 +3,16 @@ let oldSubjHolder;
 let oldTextHolder;
 let listItems = controller.retrieveTodoListItems();
 // Restore the old todo entries, there's likely a way better way of doing this!
+
+// TODO: Make the headers look prettier
+// TODO: Fix the issue where breaks in text are ignored from 
+// initial edits but added back on refresh
+// TODO: Version 0.1.5: Allow for an element to be clicked to edit
+// TODO: Version 0.1.5: Allow for keyboard shortcuts on add/edit modal actions
+// TODO: Version 0.2.0: Get the edits to work inline and not require a modal input
+// TODO: Version 0.3.0: Allow for the theme to be changed (dark/light) as well as
+// the accent colors
+
 if (listItems.length > 0) {
     console.log(listItems);
     // Put each element into the DOM
