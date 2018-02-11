@@ -76,15 +76,7 @@ if (listItems.length > 0) {
         editLink.setAttribute('href', '#');
         editLink.innerText = 'Edit...';
         editLink.addEventListener('click', function () {
-            let oldTtitle = this.parentElement.getElementsByClassName('w3-container w3-blue')[0].innerText;
-            document.getElementById('newInputSubject').value = oldTtitle;
-            let oldText = this.parentElement.getElementsByClassName('w3-container')[1].innerText;
-            document.getElementById('newInputText').value = oldText;
-            document.getElementById('editModal').style.display = 'block';
-            // Store the item temporarily as a global
-            // This may eventually cause issues
-            oldSubjHolder = oldTtitle;
-            oldTextHolder = oldText;
+            editItemInit(this);
         })
 
         // Append all of the elments together
@@ -94,6 +86,12 @@ if (listItems.length > 0) {
         document.getElementById(entry.id).appendChild(removeSpan);
         document.getElementById(entry.id).appendChild(editLink);
         document.getElementById(entry.id).appendChild(completedCheckBox);
+
+        // This is where we would have to add an event listener to provide functionality for
+        // on-element click edits
+        divToAppend.addEventListener('click', function () {
+            editItemInit(this);
+        })
     })
 }
 
@@ -196,45 +194,10 @@ document.getElementById('addTodoButton').addEventListener('click', function () {
 
 // this is so damn janky
 document.getElementById('changeTodoButton').addEventListener('click', function () {
-    document.getElementById('editModal').style.display = 'none';
-    // display the edit modalm on change, update the listItem and push to localStorage
-    let newSubject = document.getElementById('newInputSubject').value;
-    let newText = document.getElementById('newInputText').value;
-    let mainDiv = document.getElementById('listContainer');
-    // Iterate through each todo item
-    Array.prototype.forEach.call(mainDiv.children, child => {
-        // check if the item has the property we're looking for before defining it
-        if (child.getElementsByClassName('w3-container w3-blue').length > 0) {
-            // define the element to work with
-            let workingSubjElem = child.getElementsByClassName('w3-container w3-blue')[0];
-            // See if the global var matches with this local var
-            if (oldSubjHolder == workingSubjElem.innerText) {
-                // resolve for the item's text box as well 
-                console.log('Found match to edit');
-                workingSubjElem.innerHTML = `<h3>${newSubject}</h3>`;
-                // no need to check for the second item!
-                if (child.getElementsByClassName('w3-container')) {
-                    let workingTextElem = child.getElementsByClassName('w3-container')[1];
-                    workingTextElem.innerHTML = `<p>${newText}</p>`;
-                    let completetionBool;
-                    if (child.innerText.includes('closeEdit...check_box_outline_blank')) {
-                        completetionBool = false;
-                    } else {
-                        completetionBool = true;
-                    }
-                    let updatedTodoObj = {
-                        id: child.id,
-                        text: newText,
-                        title: newSubject,
-                        completed: completetionBool
-                    };
-                    // rebuild the localStorage data
-                    controller.updateItemDataByID(child.id, updatedTodoObj);
-                }
-            }
-        }
-    });
+    editButtonClickHandler();
 })
+
+
 
 // Display the input modal when the plus button is used
 document.getElementById('plusButton').addEventListener('click', function () {
@@ -303,4 +266,56 @@ function removeItem(id) {
  */
 function toggleCompletedStatus(statusBool, id) {
     return controller.updateTodoListItemCompleteStatusByID(statusBool, id);
+}
+
+function editButtonClickHandler() {
+    document.getElementById('editModal').style.display = 'none';
+    // display the edit modalm on change, update the listItem and push to localStorage
+    let newSubject = document.getElementById('newInputSubject').value;
+    let newText = document.getElementById('newInputText').value;
+    let mainDiv = document.getElementById('listContainer');
+    // Iterate through each todo item
+    Array.prototype.forEach.call(mainDiv.children, child => {
+        // check if the item has the property we're looking for before defining it
+        if (child.getElementsByClassName('w3-container w3-blue').length > 0) {
+            // define the element to work with
+            let workingSubjElem = child.getElementsByClassName('w3-container w3-blue')[0];
+            // See if the global var matches with this local var
+            if (oldSubjHolder == workingSubjElem.innerText) {
+                // resolve for the item's text box as well 
+                console.log('Found match to edit');
+                workingSubjElem.innerHTML = `<h3>${newSubject}</h3>`;
+                // no need to check for the second item!
+                if (child.getElementsByClassName('w3-container')) {
+                    let workingTextElem = child.getElementsByClassName('w3-container')[1];
+                    workingTextElem.innerHTML = `<p>${newText}</p>`;
+                    let completetionBool;
+                    if (child.innerText.includes('closeEdit...check_box_outline_blank')) {
+                        completetionBool = false;
+                    } else {
+                        completetionBool = true;
+                    }
+                    let updatedTodoObj = {
+                        id: child.id,
+                        text: newText,
+                        title: newSubject,
+                        completed: completetionBool
+                    };
+                    // rebuild the localStorage data
+                    controller.updateItemDataByID(child.id, updatedTodoObj);
+                }
+            }
+        }
+    });
+}
+
+function editItemInit(thisArg) {
+    let oldTtitle = thisArg.parentElement.getElementsByClassName('w3-container w3-blue')[0].innerText;
+    document.getElementById('newInputSubject').value = oldTtitle;
+    let oldText = thisArg.parentElement.getElementsByClassName('w3-container')[1].innerText;
+    document.getElementById('newInputText').value = oldText;
+    document.getElementById('editModal').style.display = 'block';
+    // Store the item temporarily as a global, This may eventually cause issues
+    oldSubjHolder = oldTtitle;
+    oldTextHolder = oldText;
 }
