@@ -89,7 +89,7 @@ if (listItems.length > 0) {
 
         // This is where we would have to add an event listener to provide functionality for
         // on-element click edits
-        divToAppend.addEventListener('click', function () {
+        divToAppend.addEventListener('dblclick', function () {
             editItemInit(this);
         })
     })
@@ -270,7 +270,7 @@ function toggleCompletedStatus(statusBool, id) {
 
 function editButtonClickHandler() {
     document.getElementById('editModal').style.display = 'none';
-    // display the edit modalm on change, update the listItem and push to localStorage
+    // display the edit modal on change, update the listItem and push to localStorage
     let newSubject = document.getElementById('newInputSubject').value;
     let newText = document.getElementById('newInputText').value;
     let mainDiv = document.getElementById('listContainer');
@@ -310,12 +310,20 @@ function editButtonClickHandler() {
 }
 
 function editItemInit(thisArg) {
-    let oldTtitle = thisArg.parentElement.getElementsByClassName('w3-container w3-blue')[0].innerText;
-    document.getElementById('newInputSubject').value = oldTtitle;
-    let oldText = thisArg.parentElement.getElementsByClassName('w3-container')[1].innerText;
-    document.getElementById('newInputText').value = oldText;
-    document.getElementById('editModal').style.display = 'block';
-    // Store the item temporarily as a global, This may eventually cause issues
-    oldSubjHolder = oldTtitle;
-    oldTextHolder = oldText;
+    // the thisArg should be one of two HTML elements
+    if (thisArg.tagName == 'A') {
+        let oldTtitle = thisArg.parentElement.getElementsByClassName('w3-container w3-blue')[0].innerText;
+        document.getElementById('newInputSubject').value = oldTtitle;
+        let oldText = thisArg.parentElement.getElementsByClassName('w3-container')[1].innerText;
+        document.getElementById('newInputText').value = oldText;
+        document.getElementById('editModal').style.display = 'block';
+        // Store the item temporarily as a global, This may eventually cause issues
+        oldSubjHolder = oldTtitle;
+        oldTextHolder = oldText;
+    } else if (thisArg.tagName == 'DIV') {
+        alert('Not supported yet! Click the edit button to change an item\'s content.');
+    } else {
+        alert('Unsupported edit command type (if you see this error, please report it!');
+    }
+
 }
