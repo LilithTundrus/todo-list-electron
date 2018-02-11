@@ -3,22 +3,23 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Todo List 0.1.0</title>
+    <title>Todo List 0.1.1</title>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <!-- for when we do JS, require it here -->
 </head>
 
 <body>
     <div class="w3-container w3-blue">
-        <h1>Todo List 0.1.0</h1>
+        <h1>Todo List 0.1.1</h1>
     </div>
+
     <!-- Our Main container -->
     <div class="w3-display-container">
         <!-- 'Plus' button, top right -->
         <div class="w3-padding w3-display-topright">
             <button id="plusButton" class="w3-circle w3-blue w3-button w3-xlarge">+</button>
         </div>
+
         <!-- Pull up a w3-model on click for text input -->
         <div id="inputModal" class="w3-modal">
             <div class="w3-modal-content w3-animate-bottom w3-card-4 ">
@@ -41,6 +42,8 @@
             </div>
         </div>
 
+        <!-- The modal used when an item is edited, different than the add modal
+        TBH this could probably just be the same modal but change the name of the buttons/header -->
         <div id="editModal" class="w3-modal">
             <div class="w3-modal-content w3-animate-bottom w3-card-4 ">
                 <header class="w3-container w3-blue">
@@ -65,13 +68,15 @@
         </div>
     </div>
 
+    <!-- Where all of the TODO items go -->
     <div id="listContainer" class="w3-container">
         <h3>Click the '+' button to add an item</h3>
         <br>
         <br>
     </div>
 
-    <div class="w3-center">Filter by:
+    <!-- Filter links handles by JS -->
+    <div class="w3-center">Filter By:
         <a href="#" id="completedFilter">Completed</a> or
         <a href="#" id="incompleteFilter">Incomplete</a>
         <br>
@@ -84,8 +89,9 @@
 <!-- This is also where any electron or custom Node.js code can go -->
 <script>
     let controller = require('./storageController.js');
-    // TODO: figure out why listItem elements 'come back'
     // Uncomment this if you need to reset the local storage: controller.resetListItems();
+
+    // For generating 'UUID' for the localStorage for TODO elements
     function uuid() {
         var uuid = "", i, random;
         for (i = 0; i < 32; i++) {
@@ -96,6 +102,7 @@
         return uuid;
     }
 
+    // Borrowed from SO: https://stackoverflow.com/questions/3387427/remove-element-by-id
     Element.prototype.remove = function () {
         this.parentElement.removeChild(this);
     }
